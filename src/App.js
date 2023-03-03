@@ -1,25 +1,28 @@
 import { useState, useEffect, useRef } from 'react';
 
+
+
 function App() {
+
   const [counter, setCounter] = useState(0)
 
-  const intervalRef = useRef()
+  const intervalRef = useRef(null)
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
+     intervalRef.current = setInterval(() => {
       setCounter(counter => counter + 1)
     }, 1000)
-  }, []);
+  }, [])
 
   const stopCounter = () => {
     clearInterval(intervalRef.current)
   }
 
   return (
-      <>
-        <p>{counter}</p>
-        <button onClick={stopCounter}>Stop the counter</button>
-      </>
+    <>
+      <p> {counter}</p>
+      <button onClick={stopCounter}>Stop the counter</button>
+    </>
   );
 }
 
