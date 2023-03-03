@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect, useRef } from 'react';
 
 function App() {
+  const [counter, setCounter] = useState(0)
+
+  const intervalRef = useRef()
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setCounter(counter => counter + 1)
+    }, 1000)
+  }, []);
+
+  const stopCounter = () => {
+    clearInterval(intervalRef.current)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+        <p>{counter}</p>
+        <button onClick={stopCounter}>Stop the counter</button>
+      </>
   );
 }
 
